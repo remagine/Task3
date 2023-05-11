@@ -43,4 +43,9 @@ public class Tag implements Comparable<Tag>{
         Tag otherTag = (Tag) obj;
         return id == otherTag.id;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
 }
