@@ -1,5 +1,7 @@
 package command;
 
+import tag.Tag;
+
 public enum Command {
     CREATE("create"), EXECUTE("execute");
 
@@ -9,11 +11,11 @@ public enum Command {
         this.commandName = commandName;
     }
 
-    public String getCommandName() {
+    private String getCommandName() {
         return commandName;
     }
 
-    public static Command fromString(String value) {
+    public static Command from(String value) {
         for (Command command : Command.values()) {
             if (command.getCommandName().equalsIgnoreCase(value)) {
                 return command;

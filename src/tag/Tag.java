@@ -1,13 +1,16 @@
 package tag;
 
-public class Tag implements Comparable{
+import java.util.Objects;
+
+public class Tag implements Comparable<Tag>{
     private final int id;
+    private int executeFailCnt = 0;
 
     public Tag(int id) {
         this.id = id;
     }
 
-    public static Tag fromString(String s) {
+    public static Tag from(String s) {
         try{
             return new Tag(Integer.parseInt(s));
         } catch (Exception e){
@@ -15,18 +18,29 @@ public class Tag implements Comparable{
         }
     }
 
+    public void addExecuteFailCnt(){
+        executeFailCnt++;
+    }
+
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public int compareTo(Tag otherTag) {
+        return Integer.compare(id, otherTag.id);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hashCode(id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if(this == obj){
+            return true;
+        }
+        if(obj == null || getClass() != obj.getClass()){
+            return false;
+        }
+        Tag otherTag = (Tag) obj;
+        return id == otherTag.id;
     }
 }

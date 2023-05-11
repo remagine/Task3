@@ -1,6 +1,9 @@
+
 import command.Command;
 import tag.Tag;
+import commandandtag.CommandAndTag;
 import task.Task;
+import task.TaskService;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -9,6 +12,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        TaskService taskService = TaskService.getInstance();
         String inputString =
                 """
                 21
@@ -22,7 +26,7 @@ public class Main {
                 create
                 create
                 create
-                create               
+                create
                 execute 2
                 create
                 execute 2
@@ -64,18 +68,26 @@ public class Main {
             // 처리횟수만큼 반복한다
             // 무엇을? 처리 컨텍스트의 입력으로 변환하는 작업을 의미한다.
             // 처리 컨텍스트의 입력은 Enum : Command와 Class : Tag
-            List<Task> tasks = new ArrayList<>();
             for (int i = 0; i < executeCnt; i++) {
                 String line = lines.get(i);
                 String[] argArray = line.split(" ");
-                Command command = Command.fromString(argArray[0]);
+                Command command = Command.from(argArray[0]);
                 Tag tag = null;
+
                 if (argArray.length == 2) {
-                    tag = Tag.fromString(argArray[1]);
+                    tag = Tag.from(argArray[1]);
                 }
 
-                tasks.add(new Task(command, tag));
+                CommandAndTag commandAndTag = new CommandAndTag(command, tag);
+                taskService.doTask(commandAndTag);
+
+
+
             }
+
+
+
+
 
 
 
