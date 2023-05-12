@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Tag implements Comparable<Tag>{
     private final int id;
-    private int executeFailCnt = 0;
 
     public Tag(int id) {
         this.id = id;
@@ -16,10 +15,6 @@ public class Tag implements Comparable<Tag>{
         } catch (Exception e){
             throw new IllegalArgumentException();
         }
-    }
-
-    public void addExecuteFailCnt(){
-        executeFailCnt++;
     }
 
     @Override

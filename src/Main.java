@@ -15,37 +15,37 @@ public class Main {
         TaskService taskService = TaskService.getInstance();
         String inputString =
                 """
-                21
-                create
-                create
-                create
-                create
-                execute 11
-                create
-                create
-                create
-                create
-                create
-                create
-                execute 2
-                create
-                execute 2
-                execute 11
-                execute 2
-                execute 5
-                execute 5
-                execute 2
-                execute 5
-                execute 5""";
+                        21
+                        create
+                        create
+                        create
+                        create
+                        execute 11
+                        create
+                        create
+                        create
+                        create
+                        create
+                        create
+                        execute 2
+                        create
+                        execute 2
+                        execute 11
+                        execute 2
+                        execute 5
+                        execute 5
+                        execute 2
+                        execute 5
+                        execute 5""";
         byte[] bytes = inputString.getBytes(StandardCharsets.UTF_8);
         InputStream inputStream = new ByteArrayInputStream(bytes);
         BufferedInputStream bis = new BufferedInputStream(inputStream, 8192);
         InputStreamReader isr = new InputStreamReader(bis, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr, 8192);
-        try(inputStream;
-            bis;
-            isr;
-            br;){
+        try (inputStream;
+             bis;
+             isr;
+             br;) {
 
             int executeCnt = Integer.parseInt(br.readLine());
             List<String> lines = new ArrayList<>();
@@ -68,28 +68,13 @@ public class Main {
                 }
 
                 CommandAndTag commandAndTag = new CommandAndTag(command, tag);
+                // 처리
                 taskService.doTask(commandAndTag);
             }
-
             //출력
             taskService.printTaskHistory();
-
-
-
-
-
-
-
-
-
-
-
-
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
